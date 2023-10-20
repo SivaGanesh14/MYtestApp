@@ -1,0 +1,611 @@
+package com.example;
+
+import java.util.*;
+
+public class Tester {
+
+static Scanner scanner=new Scanner(System.in);
+    public static void main(String[] args)
+    {
+        Map<Integer,Employee> employeeMap=new HashMap<Integer,Employee>();
+
+        String name=null;
+        double salary=0;
+        int choice=0;
+        do {
+
+            System.out.println("1. Create An Employee. ");
+            System.out.println("2. Display All Available Employee. ");
+            System.out.println("3. Find Employee By Id: ");
+            System.out.println("4.Remove an employee by id.");
+            System.out.println("0. Exit.");
+            System.out.print("Enter your choice: ");
+            choice= scanner.nextInt();
+            switch (choice)
+            {
+                case 1:
+                    System.out.print("Enter Name: ");
+                    name= scanner.next();
+                    System.out.print("Enter Salary: ");
+                    salary=scanner.nextDouble();
+                    int id=new Random().nextInt(10000);
+                    Employee employee=new Employee(id,name,salary);
+                    employeeMap.put(id,employee);
+                    break;
+                case 2:
+                    Collection<Employee> employees=employeeMap.values();
+                    for(Employee e: employees)
+                    {
+                        System.out.println(e);
+                    }
+                    break;
+                case 3:
+                    System.out.print("Enter Employee ID: ");
+                    id= scanner.nextInt();
+                    Employee employee1=employeeMap.get(id);
+                    if(employee1!=null)
+                    {
+                        System.out.println("Found... "+employee1);
+                    }
+                    else
+                    {
+                        System.out.println("Employee Not Found with ID: "+id);
+                    }
+                    break;
+                case 4:
+                    System.out.print("Enter Employee ID: ");
+                    id= scanner.nextInt();
+                    Employee employee2=employeeMap.get(id);
+                    if(employee2!=null)
+                    {
+                        employeeMap.remove(id);
+                        
+                        System.out.println("Deleted... ");
+                    }
+                    else
+                    {
+                        System.out.println("Employee Not Found with ID: "+id);
+                    }
+                    break;
+                case 0:
+                    System.out.println("Bye..");
+                   // System.exit(0);
+                    break;
+                default:
+                    System.out.println("invalid choice try again");
+                    break;
+            }
+        }while(choice !=0);
+
+    }
+}
+
+
+
+==========================
+
+package com.example;
+
+import java.util.*;
+
+public class Tester {
+
+static Scanner scanner=new Scanner(System.in);
+    public static void main(String[] args)
+    {
+        Map<Integer,Employee> employeeMap=new HashMap<Integer,Employee>();
+
+        String name=null;
+        double salary=0;
+        int choice=0;
+        do {
+
+            System.out.println("1. Create An Employee. ");
+            System.out.println("2. Display All Available Employee. ");
+            System.out.println("3. Find Employee By Id: ");
+            System.out.println("0. Exit.");
+            System.out.print("Enter your choice: ");
+            choice= scanner.nextInt();
+            switch (choice)
+            {
+                case 1:
+                    System.out.print("Enter Name: ");
+                    name= scanner.next();
+                    System.out.print("Enter Salary: ");
+                    salary=scanner.nextDouble();
+                    int id=new Random().nextInt(10000);
+                    Employee employee=new Employee(id,name,salary);
+                    employeeMap.put(id,employee);
+                    break;
+                case 2:
+                    Collection<Employee> employees=employeeMap.values();
+                    for(Employee e: employees)
+                    {
+                        System.out.println(e);
+                    }
+                    break;
+                case 3:
+                    System.out.print("Enter Employee ID: ");
+                    id= scanner.nextInt();
+                    Employee employee1=employeeMap.get(id);
+                    if(employee1!=null)
+                    {
+                        System.out.println("Found... "+employee1);
+                    }
+                    else
+                    {
+                        System.out.println("Employee Not Found with ID: "+id);
+                    }
+                    break;
+                case 0:
+                    System.out.println("Bye..");
+                   // System.exit(0);
+                    break;
+                default:
+                    System.out.println("invalid choice try again");
+                    break;
+            }
+        }while(choice !=0);
+
+    }
+}
+
+
+
+
+
+
+============================================
+package com.example;
+
+import java.util.*;
+
+public class Tester {
+
+
+    public static void main(String[] args)
+    {
+        Map<Integer,Employee> employeeMap=new HashMap<Integer,Employee>();
+        
+        employeeMap.put(1,new Employee(1,"John Doe",10000));
+        employeeMap.put(2,new Employee(2,"Mary Public",11000));
+        employeeMap.put(3,new Employee(3,"Mary1 Public1",11000));
+        System.out.println(employeeMap);
+        employeeMap=new TreeMap<>();
+        Set<Integer> s= employeeMap.keySet();
+        System.out.println(s);
+         Collection<Employee> c=employeeMap.values();
+         System.out.println(c);
+         Set s1= employeeMap.entrySet();
+         System.out.println(s1);
+    }
+}
+
+
+
+===============================
+package com.example;
+
+import java.util.*;
+
+public class Tester {
+
+
+    public static void main(String[] args)
+    {
+        Map<Integer,Employee> employeeMap=new HashMap<Integer,Employee>();
+        
+        employeeMap.put(1,new Employee(1,"John Doe",10000));
+        employeeMap.put(2,new Employee(2,"Mary Public",11000));
+        employeeMap.put(3,new Employee(3,"Mary1 Public1",11000));
+        System.out.println(employeeMap);
+        employeeMap=new TreeMap<>();
+        Set<Integer> s= employeeMap.keySet();
+        System.out.println(s);
+         Collection<Employee> c=employeeMap.values();
+         System.out.println(c);
+         Set s1= employeeMap.entrySet();
+         System.out.println(s1);
+    }
+}
+
+
+==================================
+package com.example;
+
+public class Employee implements Comparable{
+
+    private int id;
+    private String name;
+    double salary;
+
+    public Employee() {
+    }
+
+    public Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "id=" + id +
+                " name= " + name +
+                " salary= " + salary ;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Employee employee=(Employee) o;
+
+        if(this.salary>employee.salary)
+        {
+            return -1;
+        } else if (this.salary<employee.salary) {
+
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+
+    }
+}
+
+
+
+
+
+package com.example;
+
+import java.util.*;
+
+public class Tester {
+
+
+    public static void main(String[] args)
+    {
+
+      //  List<Employee> employees=new ArrayList<Employee>();
+        Set<Employee> employees=new TreeSet<>();
+        employees.add(new Employee(1,"John",20000));
+        employees.add(new Employee(2,"Mary",12000));
+        employees.add(new Employee(3,"Sachin",19000));
+        employees.add(new Employee(11,"Johny",20000));
+       // Collections.sort(employees);
+        Iterator<Employee> iterator= employees.iterator();
+        while (iterator.hasNext())
+        {
+            System.out.println(iterator.next());
+        }
+    }
+}
+
+
+
+
+
+========================================
+package com.example;
+
+import java.util.*;
+
+public class Tester {
+
+    private static Set<Integer> employeeSet;
+
+    private static List<Integer> employeeList;
+static
+    {
+        employeeSet=new HashSet<Integer>();
+        employeeList=new LinkedList<>();
+    }
+
+    public static void main(String[] args)
+    {
+
+       employeeSet.add(new Integer(100));
+       //auto boxing new Integer(1000)
+       employeeSet.add(1000);
+       employeeSet.add(10);
+       employeeList.add(10);
+
+        Iterator<Integer> i= employeeSet.iterator();
+        while (i.hasNext())
+        {
+            //auto unboxing
+            int temp=i.next();
+            System.out.println(temp);
+        }
+
+        employeeList.add(100);
+        employeeList.add(1000);
+        employeeList.add(10);
+
+        for(int a:employeeList)
+        {
+            System.out.println(a);
+        }
+
+
+    }
+}
+
+
+==============
+
+package com.example;
+
+public class Tester {
+    private static int count;
+    private int x=200;
+    //no name block
+
+
+    public Tester() {
+        System.out.println("I Am In No Args constructor...");
+        x=300;
+    }
+
+    {
+        System.out.println("I Am in No Name Block");
+        x=100;
+    }
+
+    static
+    {
+        System.out.println("static block 2");
+    }
+    //to initialize the static variables;
+    static
+    {
+        count=100;
+        System.out.println("I Am In Static Block"+count);
+    }
+
+    @Override
+    public String toString() {
+        return "x=" + x ;
+    }
+
+    public static void main(String[] args)
+    {
+        Tester tester=new Tester();
+        System.out.println(tester);
+    }
+}
+
+
+=============
+
+package com.example;
+public class Product extends Object{
+
+    private int productId;
+    private String productName;
+    private boolean isAvailabe;
+
+    public Product() {
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public boolean isAvailabe() {
+        return isAvailabe;
+    }
+
+    public void setAvailabe(boolean availabe) {
+        isAvailabe = availabe;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Product ID: "+productId+" Product Name: "+productName+" Available: "+isAvailabe;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        //typecasting
+        Product product=(Product) obj;
+        if((this.productId==product.productId)&&(this.productName==product.productName)&&(this.isAvailabe()==product.isAvailabe))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+import com.example.Product;
+
+public class Main {
+    public static void main(String[] args) {
+     
+        Product myProduct=new Product();
+        myProduct.setProductId(100);
+        myProduct.setProductName("Pen");
+        myProduct.setAvailabe(true);
+        System.out.println(myProduct);
+        Product myProduct1=new Product();
+        myProduct1.setProductId(100);
+        myProduct1.setProductName("Pen");
+        myProduct1.setAvailabe(true);
+        System.out.println(myProduct1);
+        if(myProduct.equals(myProduct1))
+        {
+            System.out.println("equal");
+        }
+        else
+        {
+            System.out.println("not equals");
+        }
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+    }
+}
+
+=======================
+public class Main {
+    public static void main(String[] args) {
+       //declaration and initialization
+        int arr[]={1,2,3,4};
+for(int a:arr)
+{
+    System.out.println(a);
+}
+        String str[]=new String[5];//0,1,2,3,4
+        str[0]="hello";
+        str[1]="world";
+        str[2]="A";
+        str[3]="B";
+        str[4]="C";
+
+        for(int i=0;i< str.length;i++)
+        {
+            System.out.println(str[i]);
+        }
+        
+        
+        int i=0;
+        
+        while(i< str.length)
+        {
+            System.out.println(str[i]);
+            i++;
+        }
+        
+for(String s:str)
+{
+    System.out.println(s);
+}
+        
+    }
+}public class Main {
+    public static void main(String[] args) {
+       //declaration and initialization
+        int arr[]={1,2,3,4};
+for(int a:arr)
+{
+    System.out.println(a);
+}
+        String str[]=new String[5];//0,1,2,3,4
+        str[0]="hello";
+        str[1]="world";
+        str[2]="A";
+        str[3]="B";
+        str[4]="C";
+
+        for(int i=0;i< str.length;i++)
+        {
+            System.out.println(str[i]);
+        }
+        
+        
+        int i=0;
+        
+        while(i< str.length)
+        {
+            System.out.println(str[i]);
+            i++;
+        }
+        
+for(String s:str)
+{
+    System.out.println(s);
+}
+        
+    }
+}public class Main {
+    public static void main(String[] args) {
+       //declaration and initialization
+        int arr[]={1,2,3,4};
+for(int a:arr)
+{
+    System.out.println(a);
+}
+        String str[]=new String[5];//0,1,2,3,4
+        str[0]="hello";
+        str[1]="world";
+        str[2]="A";
+        str[3]="B";
+        str[4]="C";
+
+        for(int i=0;i< str.length;i++)
+        {
+            System.out.println(str[i]);
+        }
+        
+        
+        int i=0;
+        
+        while(i< str.length)
+        {
+            System.out.println(str[i]);
+            i++;
+        }
+        
+for(String s:str)
+{
+    System.out.println(s);
+}
+        
+    }
+}

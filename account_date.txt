@@ -1,0 +1,242 @@
+package com.city;
+
+public class Employee {
+
+    private int employeeId;
+    private String firstName;
+    private String lastName;
+    private String email;
+
+    //constructor
+    public Employee()
+    {
+        System.out.println("default constructor called");
+        employeeId=100;
+        firstName="John";
+        lastName="Doe";
+        email="john@email.com";
+    }
+
+
+    public Employee(int employeeId,String firstName,String lastName,String email)
+    {
+        this.employeeId=employeeId;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.email=email;
+
+    }
+
+    public String getDetails()
+    {
+        return "Employee ID: "+employeeId+" First Name: "+firstName+" Last Name: "+lastName+" email: "+email;
+    }
+}
+
+
+
+
+
+
+package com.city;
+
+public class Main {
+    public static void main(String[] args) {
+       Employee employee=new Employee();
+       String str=employee.getDetails();
+       System.out.println(str);
+       Employee employee1=new Employee(101,"marry","public","marry@email.com");
+       System.out.println(employee1.getDetails());
+
+    }
+}
+
+
+
+
+
+
+=============
+package com.city;
+
+public class Employee {
+
+    private int employeeId;
+    private String firstName;
+    private String lastName;
+    private String email;
+
+    //constructor
+    public Employee()
+    {
+        System.out.println("default constructor called");
+        employeeId=100;
+        firstName="John";
+        lastName="Doe";
+        email="john@email.com";
+    }
+
+    public String getDetails()
+    {
+        return "Employee ID: "+employeeId+" First Name: "+firstName+" Last Name: "+lastName+" email: "+email;
+    }
+}
+
+
+
+
+
+
+
+
+package com.city;
+
+public class Main {
+    public static void main(String[] args) {
+       Employee employee=new Employee();
+       String str=employee.getDetails();
+       System.out.println(str);
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+==========
+package com.city;
+
+public class MyDate {
+
+    private int day;
+    private int month;
+    private int year;
+
+    int temp;
+
+
+    //method
+    public void getDate() {
+        System.out.println("dd-mm-yy: " + day + "-" + month + "-" + year);
+    }
+
+    public void setDate(int d, int m, int y) {
+        if (m < 1 || m > 12) {
+            System.out.println("invalid month");
+        } else if (d < 1 || d > 31) {
+            System.out.println("invalid month");
+        } else if (y < 2020) {
+            System.out.println("invalid year");
+        } else {
+            day=d;
+            month=m;
+            year=y;
+
+        }
+    }
+
+}
+
+
+
+
+=============
+
+package com.city;
+
+public class Main {
+    public static void main(String[] args) {
+        MyDate date=new MyDate();
+       date.setDate(1,-2,1998);
+        date.getDate();
+        MyDate date2=new MyDate();
+       date2.setDate(10,2,2020);
+        date2.getDate();
+        date2.temp=200;
+
+    }
+}
+
+
+
+
+
+
+==================
+//Account Class
+
+package com.city.accounts;
+
+public class Account {
+    //instance variables;
+    public int accountNumber=101;
+
+    public String accountName="Marry Public";
+
+    public double amount=100;
+}
+
+//Main class
+package com.city;
+import com.city.accounts.Account;ā
+public class Main {
+    public static void main(String[] args) {
+        //myAccount is a local variable
+        //reference type//non primitive type
+        Account myAccount=null;
+        myAccount=new Account();
+        myAccount.accountNumber=100;
+        myAccount.accountName="John Doe";
+        myAccount.amount=9000;
+        System.out.println("hello "+myAccount.accountName+" your account has been created with account number: "
+        +myAccount.accountNumber+" your balance is: "+myAccount.amount);
+        Account myAccount2=new Account();
+
+        System.out.println("hello "+myAccount2.accountName+" your account has been created with account number: "
+                +myAccount2.accountNumber+" your balance is: "+myAccount2.amount);
+
+    }
+}
+
+=====
+
+package main;
+
+      public class Switch1 {
+        public static void main(String args[])
+        {
+            //local variables
+            char op='*';
+            int a=200;
+            int b=100;
+            switch (op)
+            {
+                case '+' :
+                    System.out.println("you have chosen addition result is: "+(a+b));
+                    break;
+                case '-':
+                    System.out.println("you have chosen substraction result is: "+(a-b));
+                    break;
+                case '*':
+                    System.out.println("you have chosen multiplication result is: "+(a*b));
+                    break;
+                case '/':
+                    System.out.println("you have chosen division result is: "+(a/b));
+                    break;
+                default:
+                    System.out.println("you have chosen default");
+                    break;
+            }
+
+
+        }
+
+    }
+

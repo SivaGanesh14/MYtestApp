@@ -1,0 +1,272 @@
+==================== pom.xml file ============
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>Hibernate-CRUD</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.33</version>
+       </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.3.0.CR1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+
+    </dependencies>
+
+</project>
+
+
+==================== Hobernate.cfg.xml   file ============
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/OfficeDB</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">orcl</property>
+        <property name="hibernate.connection.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.show_sql">true</property>
+    </session-factory>
+</hibernate-configuration>
+
+
+==================== Employee class file ============
+package org.example;
+
+import jakarta.persistence.* ;
+
+@Entity
+@Table(name="Employees")
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private int id;
+    @Column(name="name")
+    private String name;
+    @Column(name="age")
+    private int age;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    @Column(name="designation")
+    private String designation;
+
+
+}
+
+
+
+==============
+Demo class data.....
+==============
+package org.example;
+
+import  java.util.* ;
+
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.*;
+import org.hibernate.query.*;
+import org.hibernate.cfg.*;
+import org.hibernate.query.criteria.HibernateCriteriaBuilder;
+import org.hibernate.transform.Transformers;
+
+public class Demo {
+
+    public static Session GetSession()
+    {
+        SessionFactory factory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Employee.class)
+                .buildSessionFactory();
+        return factory.openSession();
+    }
+
+    public static void Insert()
+    {
+        try {
+            Session session=GetSession();
+            Employee emp=new Employee();
+            emp.setName("Pall");
+            emp.setAge(40);
+            emp.setDesignation("SR ENGG");
+
+
+            session.beginTransaction();
+            session.save(emp);
+            session.getTransaction().commit();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void Update()
+    {
+        try
+        {
+            Session session=GetSession();
+            session.beginTransaction();
+            Employee emp=session.get(Employee.class, 4);
+            emp.setDesignation("IT-Tester");
+
+            session.update(emp);
+            session.getTransaction().commit();
+            session.close();
+
+        }
+        catch(Exception ex)
+        {
+
+        }
+    }
+
+
+    public static void Delete()
+    {
+        try
+        {
+            Session session=GetSession();
+            session.beginTransaction();
+            Employee emp=session.get(Employee.class, 5);
+
+
+            session.remove(emp);
+            session.getTransaction().commit();
+            session.close();
+
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void GetData()
+    {
+        try {
+            Session session=GetSession();
+            List<Employee> Emps=session.createNativeQuery("select * from Employees where id>5")
+                    .setResultTransformer(Transformers.aliasToBean(Employee.class))
+                    .getResultList();
+            for(Employee emp:Emps)
+            {
+                System.out.println(emp.getId());
+                System.out.println(emp.getName());
+                System.out.println(emp.getAge());
+                System.out.println(emp.getDesignation());
+                System.out.println("-----------------------------------");
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void GetAllRecords()
+    {
+        try
+        {
+            Session session=GetSession();
+            session.beginTransaction();
+            HibernateCriteriaBuilder cb=session.getCriteriaBuilder();
+            CriteriaQuery<Employee> cq= cb.createQuery(Employee.class);
+            Root<Employee> root=cq.from(Employee.class);
+            CriteriaQuery<Employee> all=cq.select(root);
+
+            List<Employee> Emps=session.createQuery(all).getResultList();
+
+            for(Employee emp:Emps)
+            {
+                System.out.println(emp.getId());
+                System.out.println(emp.getName());
+                System.out.println(emp.getDesignation());
+                System.out.println("-----------------------------------");
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+
+
+    public static void main(String[] args) {
+
+       // Insert();
+       //Update();
+       // Delete();
+        GetData();
+        //GetAllRecords();
+    }
+
+}

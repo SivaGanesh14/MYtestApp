@@ -1,0 +1,265 @@
+
+
+07-09-2023:
+------------------------------------
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>6.0.11</version>
+</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>6.0.11</version>
+</dependency>
+--------------------------------------------------------------------
+package com.sample;
+
+public class HDFC implements Bank
+{
+       public void GetROI()
+       {
+    	   System.out.println("This is From HDFC Class");
+       }
+}
+---------------------------------------------------------------------
+package com.sample;
+
+public class CITI implements Bank
+{
+	  public void GetROI()
+      {
+   	   System.out.println("This is From CITI Class");
+      }
+}
+
+-----------------------------------------------------------------
+package com.sample;
+
+public interface Bank {
+     void GetROI();
+}
+
+----------------------------------------------------------------------
+package com.sample;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Demo {
+
+	public static void main(String[] args) 
+	{
+       ApplicationContext factory=new ClassPathXmlApplicationContext("spring.xml");
+       Bank obj=(Bank)factory.getBean("bankclass");
+       obj.GetROI();
+	}
+
+}
+
+-----------------------------------------------------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    id="bankclass" class="com.sample.HDFC"></bean>
+</beans>
+---------------------------------------------------------------
+
+
+<dependencies>
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>6.0.11</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>6.0.11</version>
+            </dependency>
+</dependencies>
+
+-----------------------------------------------------------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    
+   <bean id="bankclass" class="com.sample.CITI"></bean>
+</beans>
+============
+
+-------------------------------------------------------------------
+package com.sample;
+
+public class HDFC implements Bank
+{
+	  private double ROI;
+	  	  
+      private String CountryName;
+
+      
+      
+	public HDFC(double rOI, String countryName) {
+		super();
+		ROI = rOI;
+		CountryName = countryName;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "HDFC [ROI=" + ROI + ", CountryName=" + CountryName + "]";
+	}
+
+
+
+	public void GetROI()
+       {
+    	   System.out.println("This is From HDFC Class");
+       }
+}
+
+--------------------------------------------------------------------------------------------
+package com.sample;
+
+public class CITI implements Bank
+{
+	private double ROI;
+	  
+    private String CountryName;
+
+       
+	public CITI(double rOI, String countryName) {
+		super();
+		ROI = rOI;
+		CountryName = countryName;
+	}
+
+
+	@Override
+	public String toString() {
+		return "CITI [ROI=" + ROI + ", CountryName=" + CountryName + "]";
+	}
+
+
+	public void GetROI()
+      {
+   	   System.out.println("This is From CITI Class");
+      }
+}
+-----------------------------------------------------------------------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    
+   <bean id="bankclass" class="com.sample.CITI">
+	   <constructor-arg index="0" value="16.56"></constructor-arg>
+	   <constructor-arg index="1" value="INDIA"></constructor-arg>
+   </bean>
+</beans>
+-----------------------------------------------------------------------------------------------
+package com.sample;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Demo {
+
+	public static void main(String[] args) 
+	{
+       ApplicationContext factory=new ClassPathXmlApplicationContext("spring.xml");
+       Bank obj=(Bank)factory.getBean("bankclass");
+       obj.GetROI();
+       System.out.println(obj);
+	}
+
+}
+
+=================
+
+----------------------------------------------------------------
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context = "http://www.springframework.org/schema/context"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+   <context:component-scan base-package="com.sample"></context:component-scan>
+
+</beans>
+
+============ CITI object class
+package com.sample;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class CITI implements Bank{
+    private double ROI=2.345;
+
+    private String CountryName="SSG";
+
+    public CITI() {
+    }
+
+    public CITI(double rOI, String countryName) {
+        super();
+        ROI = rOI;
+        CountryName = countryName;
+    }
+
+
+    @Override
+    public String toString() {
+        return "CITI [ROI=" + ROI + ", CountryName=" + CountryName + "]";
+    }
+
+
+    public void GetROI()
+    {
+        System.out.println("This is From CITI Class");
+    }
+}
+
+
+========== Demo.Java....... can be executed as it alone have main
+package com.sample;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Demo {
+
+    public static void main(String[] args)
+    {
+        ApplicationContext factory=new ClassPathXmlApplicationContext("SprintAnnotation.xml");
+        Bank obj=(Bank)factory.getBean("CITI");
+        obj.GetROI();
+        System.out.println(obj);
+
+        Bank obj1=(Bank)factory.getBean("HDFC");
+        obj1.GetROI();
+        System.out.println(obj1);
+    }
+
+}
+

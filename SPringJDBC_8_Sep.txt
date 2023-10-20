@@ -1,0 +1,705 @@
+----------------------------------------------------------------------------------------
+<dependencies>
+	  <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>6.0.11</version>
+</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>6.0.11</version>
+</dependency>
+
+  </dependencies>
+  -------------------------------------------------------------------------------
+package com.sample;
+
+public class Employee {
+      private int Id;
+      private String Name;
+      private double Salary;
+      private Department department;
+	
+	public int getId() {
+		return Id;
+	}
+	
+	public void setId(int id) {
+		Id = id;
+	}
+	
+	public String getName() {
+		return Name;
+	}
+	
+	public void setName(String name) {
+		Name = name;
+	}
+	
+	public double getSalary() {
+		return Salary;
+	}
+	
+	public void setSalary(double salary) {
+		Salary = salary;
+	}
+	
+	public Department getDepartment() {
+		return department;
+	}
+	
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+	public Employee(int id, String name, double salary, Department department) {
+		super();
+		Id = id;
+		Name = name;
+		Salary = salary;
+		this.department = department;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [Id=" + Id + ", Name=" + Name + ", Salary=" + Salary + ", department=" + department + "]";
+	}
+      
+      
+      
+}
+
+------------------------------------------------------------------------------
+package com.sample;
+
+public class Department {
+		private int Did;
+		private String Name;
+		
+		public int getDid() {
+			return Did;
+		}
+		
+		public void setDid(int did) {
+			Did = did;
+		}
+		
+		public String getName() {
+			return Name;
+		}
+		
+		public void setName(String name) {
+			Name = name;
+		}
+		public Department(int did, String name) {
+			super();
+			Did = did;
+			Name = name;
+		}
+
+		@Override
+		public String toString() {
+			return "Department [Did=" + Did + ", Name=" + Name + "]";
+		}
+		
+		
+}
+
+------------------------------------------------------------------------
+package com.sample;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+   
+	 @Bean
+	 public Employee getEmployee()
+	 {
+		 Department dept=this.getDepartment();
+		 return new Employee(101,"John",65000,dept);
+	 }
+	 
+	 @Bean
+	 public Department getDepartment()
+	 {
+		 return new Department(9001,"IT-DEV");
+	 }
+}
+
+-------------------------------------------------------------------------
+package com.sample;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		ApplicationContext context=
+				new AnnotationConfigApplicationContext(AppConfig.class);
+		Employee emp=(Employee)context.getBean(Employee.class);
+		System.out.println(emp);
+
+	}
+
+}
+
+---------------------------------------------------------------------------
+
+2nd Project..
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>SpringJDBC</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>5.3.14</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.19</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>6.0.11</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+
+    </dependencies>
+</project>
+
+============== From Code Share
+
+
+
+
+ <dependencies>
+			<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-context</artifactId>
+			    <version>6.0.11</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-core</artifactId>
+			    <version>6.0.11</version>
+			</dependency>
+			
+			
+			<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-jdbc</artifactId>
+			    <version>6.0.11</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+			<dependency>
+			    <groupId>mysql</groupId>
+			    <artifactId>mysql-connector-java</artifactId>
+			    <version>8.0.33</version>
+			</dependency>
+
+
+
+  </dependencies>
+  
+  password: orcl
+  --------------------------------------------------------------------------------
+  
+  create database StoreDB;
+
+use StoreDB;
+Create table Products
+(
+   id int,
+   name varchar(20),
+   price double
+)
+
+
+---------------------------------------------------------------------------------------------
+package com.sample;
+
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+@Configuration
+public class AppConfig 
+{
+		@Bean
+		public DataSource datasource()
+		{
+			   DriverManagerDataSource datasource=new DriverManagerDataSource();
+			   datasource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+			   datasource.setUrl("jdbc:mysql://localhost:3306/StoreDB");
+			   datasource.setUsername("root");
+			   datasource.setPassword("123456");//orcl
+			   return datasource;
+		}
+}
+
+====
+---------------------------------------------------------------------
+package com.sample;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Product
+{
+		private int id;
+		private String name;
+		private double price;
+		
+		
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public double getPrice() {
+			return price;
+		}
+		public void setPrice(double price) {
+			this.price = price;
+		}
+		
+		
+		
+}
+==============================
+
+---------------------------------------------------------------------------------------------
+package com.sample;
+
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+@Configuration
+public class AppConfig 
+{
+		@Bean
+		public DataSource datasource()
+		{
+			   DriverManagerDataSource datasource=new DriverManagerDataSource();
+			   datasource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+			   datasource.setUrl("jdbc:mysql://localhost:3306/StoreDB");
+			   datasource.setUsername("root");
+			   datasource.setPassword("123456");//orcl
+			   return datasource;
+		}
+}
+
+---------------------------------------------------------------------
+package com.sample;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Product
+{
+		private int id;
+		private String name;
+		private double price;
+		
+		
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public double getPrice() {
+			return price;
+		}
+		public void setPrice(double price) {
+			this.price = price;
+		}
+		
+		
+		
+}
+---------------------------------------------------------------------
+
+package com.sample;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ProductDAO 
+{
+		private final JdbcTemplate jdbcTemplate;
+		
+		@Autowired
+		public ProductDAO(JdbcTemplate jdbcTemplate)
+		{
+			this.jdbcTemplate=jdbcTemplate;
+		}
+		
+		public void Add(Product prod)
+		{
+			String query="insert into products(id,name,price)values(?,?,?)";
+			int _rows=jdbcTemplate.update(query,prod.getId(),prod.getName(),prod.getPrice());
+			System.out.println(_rows+" Record(s) Inserted Successfully!");
+		}
+}
+
+---------------------------------------------------------------------------------
+package com.sample;
+
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+@Configuration
+public class AppConfig 
+{
+		@Bean
+		public DataSource datasource()
+		{
+			   DriverManagerDataSource datasource=new DriverManagerDataSource();
+			   datasource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+			   datasource.setUrl("jdbc:mysql://localhost:3306/StoreDB");
+			   datasource.setUsername("root");
+			   datasource.setPassword("123456");//orcl
+			   return datasource;
+		}
+		
+		@Bean
+		public ProductDAO getProductDAO()
+		{
+			return new ProductDAO(new JdbcTemplate(datasource()));
+		}
+}
+
+---------------------------------------------------------------------------
+package com.sample;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main {
+
+	public static void Insert()
+	{
+		 ApplicationContext context=new AnnotationConfigApplicationContext(AppConfig.class);
+		 ProductDAO dao=(ProductDAO)context.getBean(ProductDAO.class);
+		 
+		 Product prod=new Product();
+		 prod.setId(101);
+		 prod.setName("Iphone 12 Mini");
+		 prod.setPrice(65000);
+		 
+		 dao.Add(prod);
+	}
+	public static void main(String[] args) {
+		
+			Insert();
+	}
+
+}
+
+-------------------------------------------------------------------------------------
+============================
+
+
+ <dependencies>
+			<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-context</artifactId>
+			    <version>6.0.11</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-core</artifactId>
+			    <version>6.0.11</version>
+			</dependency>
+			
+			
+			<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-jdbc</artifactId>
+			    <version>6.0.11</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+			<dependency>
+			    <groupId>mysql</groupId>
+			    <artifactId>mysql-connector-java</artifactId>
+			    <version>8.0.33</version>
+			</dependency>
+
+
+
+  </dependencies>
+  ------------------------------------------------------------------------------------------
+  package com.sample;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Product
+{
+		private int id;
+		private String name;
+		private double price;
+		
+		
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public double getPrice() {
+			return price;
+		}
+		public void setPrice(double price) {
+			this.price = price;
+		}
+		
+		
+		
+}
+--------------------------------------------------------------------------------
+package com.sample;
+
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+@Configuration
+public class AppConfig 
+{
+		@Bean
+		public DataSource datasource()
+		{
+			   DriverManagerDataSource datasource=new DriverManagerDataSource();
+			   datasource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+			   datasource.setUrl("jdbc:mysql://localhost:3306/StoreDB");
+			   datasource.setUsername("root");
+			   datasource.setPassword("123456");//orcl
+			   return datasource;
+		}
+		
+		@Bean
+		public ProductDAO getProductDAO()
+		{
+			return new ProductDAO(new JdbcTemplate(datasource()));
+		}
+}
+
+-----------------------------------------------------------------------------------
+package com.sample;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ProductDAO 
+{
+		private final JdbcTemplate jdbcTemplate;
+		
+		@Autowired
+		public ProductDAO(JdbcTemplate jdbcTemplate)
+		{
+			this.jdbcTemplate=jdbcTemplate;
+		}
+		
+		public void Add(Product prod)
+		{
+			String query="insert into products(id,name,price)values(?,?,?)";
+			int _rows=jdbcTemplate.update(query,prod.getId(),prod.getName(),prod.getPrice());
+			System.out.println(_rows+" Record(s) Inserted Successfully!");
+		}
+		
+		public List<Product> GetProducts()
+		{
+			 String sqlquery="select * from products";
+			 List<Product> prods= jdbcTemplate.query(sqlquery,new ProductRowMapper());
+			 System.out.println("---------------------------------");
+			 System.out.println("Rows Available:"+prods.size());
+			 System.out.println("---------------------------------");
+			 return prods;
+		}
+		
+		public void Update(Product prod)
+		{
+			String query="update products set name=?,price=? where id=?";
+			int _rows=jdbcTemplate.update(query,prod.getName(),prod.getPrice(),prod.getId());
+			System.out.println(_rows+" Record(s) Updated Successfully!");
+		}
+		
+		public void Delete(int id)
+		{
+			String query="delete from products where id=?";
+			int _rows=jdbcTemplate.update(query,id);
+			System.out.println(_rows+" Record(s) Deleted Successfully!");
+		}
+}
+
+-------------------------------------------------------------------------------------------------
+package com.sample;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+public class ProductRowMapper implements RowMapper<Product> {
+
+	@Override
+	public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+		   Product prod=new Product();
+		   prod.setId(rs.getInt("id"));
+		   prod.setName(rs.getString("name"));
+		   prod.setPrice(rs.getDouble("price"));   
+		return prod;
+	}
+       
+}
+
+------------------------------------------------------------------------------------------------
+package com.sample;
+
+import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main {
+
+	public static void Insert()
+	{
+		 ApplicationContext context=new AnnotationConfigApplicationContext(AppConfig.class);
+		 ProductDAO dao=(ProductDAO)context.getBean(ProductDAO.class);
+		 
+		 Product prod=new Product();
+		 prod.setId(104);
+		 prod.setName("Samsung S23 FE");
+		 prod.setPrice(85000);
+		 
+		 dao.Add(prod);
+	}
+	
+	public static void GetData()
+	{
+		ApplicationContext context=new AnnotationConfigApplicationContext(AppConfig.class);
+		 ProductDAO dao=(ProductDAO)context.getBean(ProductDAO.class);
+		 
+		List<Product> products= dao.GetProducts();
+		for(Product prod:products)
+		{
+			System.out.println("Id:"+prod.getId());
+			System.out.println("Name:"+prod.getName());
+			System.out.println("Price:"+prod.getPrice());
+			System.out.println("--------------------------------------");
+		}
+	}
+	public static void Update()
+	{
+		 ApplicationContext context=new AnnotationConfigApplicationContext(AppConfig.class);
+		 ProductDAO dao=(ProductDAO)context.getBean(ProductDAO.class);
+		 
+		 Product prod=new Product();
+		 prod.setId(104);
+		 prod.setName("Samsung S23 FE");
+		 prod.setPrice(99000);
+		 
+		 dao.Update(prod);
+	}
+	
+	public static void Delete()
+	{
+		 ApplicationContext context=new AnnotationConfigApplicationContext(AppConfig.class);
+		 ProductDAO dao=(ProductDAO)context.getBean(ProductDAO.class);
+		 
+		 dao.Delete(103);
+	}
+	
+	public static void main(String[] args) {
+		
+			Delete();
+	}
+
+}
+------------------------------------------------------------------------------------
+
+Feedback Link:
+
+https://tcheck.co/2nfJzc
+
+--------------------------------------------------------------------------------------

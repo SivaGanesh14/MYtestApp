@@ -1,0 +1,1128 @@
+package com.example;
+
+public interface Flyer {
+
+    public void land();
+    public void fly();
+    public void takeOff();
+}
+
+
+package com.example;
+
+public class AirBus implements Flyer{
+    @Override
+    public void land() {
+System.out.println("airbus land");
+    }
+
+    @Override
+    public void fly() {
+
+    }
+
+    @Override
+    public void takeOff() {
+
+    }
+}
+
+
+package com.example;
+
+public class SuperMan implements Flyer{
+    @Override
+    public void land() {
+System.out.println("super man can land");
+    }
+
+    @Override
+    public void fly() {
+
+    }
+
+    @Override
+    public void takeOff() {
+
+    }
+}
+
+
+package com.example;
+
+public class Bird implements Flyer{
+    @Override
+    public void land() {
+System.out.println("bird can land");
+    }
+
+    @Override
+    public void fly() {
+
+    }
+
+    @Override
+    public void takeOff() {
+
+    }
+}
+
+
+
+
+
+package test;
+
+import com.example.*;
+
+import java.util.Random;
+import java.util.Scanner;
+import java.util.UUID;
+
+public class Main {
+
+//    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        Flyer F1 =new SuperMan();
+        F1.land();
+        F1 =new Bird();
+        F1.land();
+        F1 =new AirBus();
+        F1.land();
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=============
+
+package com.example;
+
+public class Employee {
+
+    private String employeeId;
+    private String firstName;
+    private String lastName;
+    private Department department;
+
+    public Employee() {
+        System.out.println("constructor of employee called");
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+
+    public String getDetails()
+    {
+        return "EmployeeID: "+employeeId+" First name: "+firstName
+                +"last name: "+lastName+" department detials: "+department.getDetails();
+    }
+}
+
+
+
+
+package com.example;
+
+public class Department {
+
+    private int departmentId;
+    private String departmentName;
+
+    public Department() {
+        System.out.println("constructor of dept called.");
+    }
+
+    public int getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getDetails()
+    {
+        return "department id: "+departmentId+" department name: "+departmentName;
+    }
+}
+
+
+
+
+
+
+package com.example;
+
+public class RegularEmployee extends Employee{
+
+    private double salary;
+
+    public RegularEmployee() {
+
+        super();
+        System.out.println("constructor of regemp called..");
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails()+" salary:  "+salary;
+    }
+}
+
+
+
+
+package com.example;
+
+public class HourlyPaidEmployee extends Employee{
+
+    private double payRatePerHour;
+
+    public HourlyPaidEmployee() {
+    super();
+        System.out.println("hpe cons called...");
+    }
+
+    public double getPayRatePerHour() {
+        return payRatePerHour;
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails()+" Hourly Rate: "+payRatePerHour;
+    }
+
+    public void setPayRatePerHour(double payRatePerHour) {
+        this.payRatePerHour = payRatePerHour;
+    }
+}
+
+
+
+package test;
+
+import com.example.*;
+
+import java.util.Random;
+import java.util.Scanner;
+import java.util.UUID;
+
+public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        System.out.println("enter employee first name: ");
+        String fname = scanner.next();
+        System.out.println("enter employee last name: ");
+        String lname = scanner.next();
+        System.out.println("enter employee department name: ");
+        String dname = scanner.next();
+        System.out.println("rate per hour: ");
+        double s=scanner.nextDouble();
+        Department department = new Department();
+        department.setDepartmentId(new Random().nextInt(1000000));
+        department.setDepartmentName(dname);
+       // RegularEmployee employee = new RegularEmployee();;
+
+        HourlyPaidEmployee employee=new HourlyPaidEmployee();
+        employee.setEmployeeId(UUID.randomUUID().toString());
+        employee.setFirstName(fname);
+        employee.setLastName(lname);
+        employee.setPayRatePerHour(s);
+        employee.setDepartment(department);
+
+        System.out.println(employee.getDetails());
+
+
+    }
+}
+
+package com.example;
+
+public class Employee {
+
+    private String employeeId;
+    private String firstName;
+    private String lastName;
+    private Department department;
+
+    public Employee() {
+        System.out.println("constructor of employee called");
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+
+    public String getDetails()
+    {
+        return "EmployeeID: "+employeeId+" First name: "+firstName
+                +"last name: "+lastName+" department detials: "+department.getDetails();
+    }
+}
+
+
+
+
+package com.example;
+
+public class Department {
+
+    private int departmentId;
+    private String departmentName;
+
+    public Department() {
+        System.out.println("constructor of dept called.");
+    }
+
+    public int getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getDetails()
+    {
+        return "department id: "+departmentId+" department name: "+departmentName;
+    }
+}
+
+
+
+
+
+
+package com.example;
+
+public class RegularEmployee extends Employee{
+
+    private double salary;
+
+    public RegularEmployee() {
+
+        super();
+        System.out.println("constructor of regemp called..");
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails()+" salary:  "+salary;
+    }
+}
+
+
+
+
+package com.example;
+
+public class HourlyPaidEmployee extends Employee{
+
+    private double payRatePerHour;
+
+    public HourlyPaidEmployee() {
+    super();
+        System.out.println("hpe cons called...");
+    }
+
+    public double getPayRatePerHour() {
+        return payRatePerHour;
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails()+" Hourly Rate: "+payRatePerHour;
+    }
+
+    public void setPayRatePerHour(double payRatePerHour) {
+        this.payRatePerHour = payRatePerHour;
+    }
+}
+
+
+
+package test;
+
+import com.example.*;
+
+import java.util.Random;
+import java.util.Scanner;
+import java.util.UUID;
+
+public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        System.out.println("enter employee first name: ");
+        String fname = scanner.next();
+        System.out.println("enter employee last name: ");
+        String lname = scanner.next();
+        System.out.println("enter employee department name: ");
+        String dname = scanner.next();
+        System.out.println("rate per hour: ");
+        double s=scanner.nextDouble();
+        Department department = new Department();
+        department.setDepartmentId(new Random().nextInt(1000000));
+        department.setDepartmentName(dname);
+       // RegularEmployee employee = new RegularEmployee();;
+
+        HourlyPaidEmployee employee=new HourlyPaidEmployee();
+        employee.setEmployeeId(UUID.randomUUID().toString());
+        employee.setFirstName(fname);
+        employee.setLastName(lname);
+        employee.setPayRatePerHour(s);
+        employee.setDepartment(department);
+
+        System.out.println(employee.getDetails());
+
+
+    }
+}package com.example;
+
+public class Employee {
+
+    private String employeeId;
+    private String firstName;
+    private String lastName;
+    private Department department;
+
+    public Employee() {
+        System.out.println("constructor of employee called");
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+
+    public String getDetails()
+    {
+        return "EmployeeID: "+employeeId+" First name: "+firstName
+                +"last name: "+lastName+" department detials: "+department.getDetails();
+    }
+}
+
+
+
+
+package com.example;
+
+public class Department {
+
+    private int departmentId;
+    private String departmentName;
+
+    public Department() {
+        System.out.println("constructor of dept called.");
+    }
+
+    public int getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getDetails()
+    {
+        return "department id: "+departmentId+" department name: "+departmentName;
+    }
+}
+
+
+
+
+
+
+package com.example;
+
+public class RegularEmployee extends Employee{
+
+    private double salary;
+
+    public RegularEmployee() {
+
+        super();
+        System.out.println("constructor of regemp called..");
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails()+" salary:  "+salary;
+    }
+}
+
+
+
+
+package com.example;
+
+public class HourlyPaidEmployee extends Employee{
+
+    private double payRatePerHour;
+
+    public HourlyPaidEmployee() {
+    super();
+        System.out.println("hpe cons called...");
+    }
+
+    public double getPayRatePerHour() {
+        return payRatePerHour;
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails()+" Hourly Rate: "+payRatePerHour;
+    }
+
+    public void setPayRatePerHour(double payRatePerHour) {
+        this.payRatePerHour = payRatePerHour;
+    }
+}
+
+
+
+package test;
+
+import com.example.*;
+
+import java.util.Random;
+import java.util.Scanner;
+import java.util.UUID;
+
+public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        System.out.println("enter employee first name: ");
+        String fname = scanner.next();
+        System.out.println("enter employee last name: ");
+        String lname = scanner.next();
+        System.out.println("enter employee department name: ");
+        String dname = scanner.next();
+        System.out.println("rate per hour: ");
+        double s=scanner.nextDouble();
+        Department department = new Department();
+        department.setDepartmentId(new Random().nextInt(1000000));
+        department.setDepartmentName(dname);
+       // RegularEmployee employee = new RegularEmployee();;
+
+        HourlyPaidEmployee employee=new HourlyPaidEmployee();
+        employee.setEmployeeId(UUID.randomUUID().toString());
+        employee.setFirstName(fname);
+        employee.setLastName(lname);
+        employee.setPayRatePerHour(s);
+        employee.setDepartment(department);
+
+        System.out.println(employee.getDetails());
+
+
+    }
+}package com.example;
+
+public class Employee {
+
+    private String employeeId;
+    private String firstName;
+    private String lastName;
+    private Department department;
+
+    public Employee() {
+        System.out.println("constructor of employee called");
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+
+    public String getDetails()
+    {
+        return "EmployeeID: "+employeeId+" First name: "+firstName
+                +"last name: "+lastName+" department detials: "+department.getDetails();
+    }
+}
+
+
+
+
+package com.example;
+
+public class Department {
+
+    private int departmentId;
+    private String departmentName;
+
+    public Department() {
+        System.out.println("constructor of dept called.");
+    }
+
+    public int getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getDetails()
+    {
+        return "department id: "+departmentId+" department name: "+departmentName;
+    }
+}
+
+
+
+
+
+
+package com.example;
+
+public class RegularEmployee extends Employee{
+
+    private double salary;
+
+    public RegularEmployee() {
+
+        super();
+        System.out.println("constructor of regemp called..");
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails()+" salary:  "+salary;
+    }
+}
+
+
+
+
+package com.example;
+
+public class HourlyPaidEmployee extends Employee{
+
+    private double payRatePerHour;
+
+    public HourlyPaidEmployee() {
+    super();
+        System.out.println("hpe cons called...");
+    }
+
+    public double getPayRatePerHour() {
+        return payRatePerHour;
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails()+" Hourly Rate: "+payRatePerHour;
+    }
+
+    public void setPayRatePerHour(double payRatePerHour) {
+        this.payRatePerHour = payRatePerHour;
+    }
+}
+
+
+
+package test;
+
+import com.example.*;
+
+import java.util.Random;
+import java.util.Scanner;
+import java.util.UUID;
+
+public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        System.out.println("enter employee first name: ");
+        String fname = scanner.next();
+        System.out.println("enter employee last name: ");
+        String lname = scanner.next();
+        System.out.println("enter employee department name: ");
+        String dname = scanner.next();
+        System.out.println("rate per hour: ");
+        double s=scanner.nextDouble();
+        Department department = new Department();
+        department.setDepartmentId(new Random().nextInt(1000000));
+        department.setDepartmentName(dname);
+       // RegularEmployee employee = new RegularEmployee();;
+
+        HourlyPaidEmployee employee=new HourlyPaidEmployee();
+        employee.setEmployeeId(UUID.randomUUID().toString());
+        employee.setFirstName(fname);
+        employee.setLastName(lname);
+        employee.setPayRatePerHour(s);
+        employee.setDepartment(department);
+
+        System.out.println(employee.getDetails());
+
+
+    }
+}package com.example;
+
+public class Employee {
+
+    private String employeeId;
+    private String firstName;
+    private String lastName;
+    private Department department;
+
+    public Employee() {
+        System.out.println("constructor of employee called");
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+
+    public String getDetails()
+    {
+        return "EmployeeID: "+employeeId+" First name: "+firstName
+                +"last name: "+lastName+" department detials: "+department.getDetails();
+    }
+}
+
+
+
+
+package com.example;
+
+public class Department {
+
+    private int departmentId;
+    private String departmentName;
+
+    public Department() {
+        System.out.println("constructor of dept called.");
+    }
+
+    public int getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getDetails()
+    {
+        return "department id: "+departmentId+" department name: "+departmentName;
+    }
+}
+
+
+
+
+
+
+package com.example;
+
+public class RegularEmployee extends Employee{
+
+    private double salary;
+
+    public RegularEmployee() {
+
+        super();
+        System.out.println("constructor of regemp called..");
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails()+" salary:  "+salary;
+    }
+}
+
+
+
+
+package com.example;
+
+public class HourlyPaidEmployee extends Employee{
+
+    private double payRatePerHour;
+
+    public HourlyPaidEmployee() {
+    super();
+        System.out.println("hpe cons called...");
+    }
+
+    public double getPayRatePerHour() {
+        return payRatePerHour;
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails()+" Hourly Rate: "+payRatePerHour;
+    }
+
+    public void setPayRatePerHour(double payRatePerHour) {
+        this.payRatePerHour = payRatePerHour;
+    }
+}
+
+
+
+package test;
+
+import com.example.*;
+
+import java.util.Random;
+import java.util.Scanner;
+import java.util.UUID;
+
+public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        System.out.println("enter employee first name: ");
+        String fname = scanner.next();
+        System.out.println("enter employee last name: ");
+        String lname = scanner.next();
+        System.out.println("enter employee department name: ");
+        String dname = scanner.next();
+        System.out.println("rate per hour: ");
+        double s=scanner.nextDouble();
+        Department department = new Department();
+        department.setDepartmentId(new Random().nextInt(1000000));
+        department.setDepartmentName(dname);
+       // RegularEmployee employee = new RegularEmployee();;
+
+        HourlyPaidEmployee employee=new HourlyPaidEmployee();
+        employee.setEmployeeId(UUID.randomUUID().toString());
+        employee.setFirstName(fname);
+        employee.setLastName(lname);
+        employee.setPayRatePerHour(s);
+        employee.setDepartment(department);
+
+        System.out.println(employee.getDetails());
+
+
+    }
+}
+
+
+=====================================
+
+package test;
+
+import com.example.*;
+
+import java.util.Random;
+import java.util.Scanner;
+import java.util.UUID;
+
+public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        System.out.println("enter employee first name: ");
+        String fname = scanner.next();
+        System.out.println("enter employee last name: ");
+        String lname = scanner.next();
+        System.out.println("enter employee department name: ");
+        String dname = scanner.next();
+        System.out.println("rate per hour: ");
+        double s=scanner.nextDouble();
+        Department department = new Department();
+        department.setDepartmentId(new Random().nextInt(1000000));
+        department.setDepartmentName(dname);
+       // RegularEmployee employee = new RegularEmployee();;
+
+        HourlyPaidEmployee employee=new HourlyPaidEmployee();
+        employee.setEmployeeId(UUID.randomUUID().toString());
+        employee.setFirstName(fname);
+        employee.setLastName(lname);
+        employee.setPayRatePerHour(s);
+        employee.setDepartment(department);
+        System.out.println("Hourly Paid Employee Details\n==================\n"+employee.getDetails());
+        System.out.println("enter employee first name: ");
+        String fname1 = scanner.next();
+        System.out.println("enter employee last name: ");
+        String lname1 = scanner.next();
+        System.out.println("enter employee department name: ");
+        String dname1 = scanner.next();
+        System.out.println("salary: ");
+        double s1=scanner.nextDouble();
+        department.setDepartmentId(new Random().nextInt(100000));
+        department.setDepartmentName(dname1);
+        RegularEmployee employee1=new RegularEmployee();
+        employee1.setEmployeeId(UUID.randomUUID().toString());
+        employee1.setFirstName(fname1);
+        employee1.setLastName(lname1);
+        employee1.setSalary(s1);
+        employee1.setDepartment(department);
+
+        System.out.println("Regular Employee Details\n==================\n"+employee1.getDetails());
+
+
+    }
+}

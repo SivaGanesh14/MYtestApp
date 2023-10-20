@@ -1,0 +1,37 @@
+https://tcheck.co/nN9Qz5
+
+https://app.mymapit.in/code4/tiny/Z6smSC 
+
+
+
+package com.example;
+
+public class Tester1 {
+
+    public static void main(String[] args)
+    {
+        int a=100;
+        int b=0;
+
+        try
+        {
+            System.out.println(args[0]);
+            int result=a/b;
+            System.out.println("Result Is: "+result);
+
+
+
+        }
+    catch (ArithmeticException e)
+    {
+        System.out.println("Exception Occured...");
+    }
+        catch(ArrayIndexOutOfBoundsException e)
+        {
+            System.out.println("array index exception...");
+        }
+
+
+        System.out.println("hello world");
+    }
+}

@@ -1,0 +1,1433 @@
+
+import java.io.*;
+public class FileHandling1 {
+
+	public static void main(String[] args) throws IOException {
+		File file=new File("D:\\Java\\test.txt");
+		boolean result= file.createNewFile();
+		if(result)
+		{
+			System.out.println("File Created Successfully!");
+		}
+		else
+		{
+			System.out.println("File Already Exists!");
+		}
+	}
+
+}ā
+------------------------------------------------
+Write Text
+------------------------------------------------
+import java.io.*;
+public class WriteData {
+
+	public static void main(String[] args) {
+		try {
+			String fpath="D://Java//test.txt";
+			File file=new File(fpath);
+			if(file.exists())
+			{					
+			FileOutputStream fos=new FileOutputStream(fpath);
+			String text="Hello World This is sample Text";
+			fos.write(text.getBytes());
+			}
+			else
+			{
+				System.out.println("Incorrect File Path!");
+			}
+		}
+		catch(Exception ex)
+		{
+			
+		}
+
+	}
+
+}
+-----------------------------------------------------------------
+public class WriteData {
+
+	public static void main(String[] args) {
+		try {
+			String fpath="D://Java//test.txt";
+			File file=new File(fpath);
+			if(file.exists())
+			{					
+//			FileOutputStream fos=new FileOutputStream(fpath);
+//			String text="Hello World This is sample Text";
+//			fos.write(text.getBytes());
+//			fos.close();
+				BufferedWriter bw=new BufferedWriter(new FileWriter(fpath));
+				bw.write("Hello User...This is Sample Text");
+				bw.close();
+			}
+			else
+			{
+				System.out.println("Incorrect File Path!");
+			}
+		}
+		catch(Exception ex)
+		{
+			
+		}
+
+import java.nio.charset.StandardCharsets;
+	}
+
+}
+
+
+
+import java.io.*;
+
+
+----------------------------------------------------------------
+import java.io.*;
+public class ReadData {
+
+	public static void main(String[] args) {
+		String fpath="D://Java//test.txt";
+		File file=new File(fpath);
+		if(file.exists())
+		{
+		try {
+			FileInputStream fis=new FileInputStream(fpath);
+			int bytedata;
+			while((bytedata=fis.read())!=-1)
+			{
+				System.out.print((char)bytedata);
+			}
+		}
+		catch(Exception ex)
+		{
+			
+		}
+		}
+		else
+		{
+			System.out.println("Invalid File Path!");
+		}
+
+	}
+
+}
+
+-------------------------------------------------------------
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+public class ReadData {
+
+	public static void main(String[] args) {
+		String fpath="D://Java//test.txt";
+		File file=new File(fpath);
+		if(file.exists())
+		{
+		try {
+//			FileInputStream fis=new FileInputStream(fpath);
+//			int bytedata;
+//			while((bytedata=fis.read())!=-1)
+//			{
+//				System.out.print((char)bytedata);
+//			}
+			Path path=Paths.get(fpath);
+			List<String> lines=Files.readAllLines(path, StandardCharsets.UTF_8);
+			lines.forEach((line)->System.out.println(line));
+			
+			
+		}
+		catch(Exception ex)
+		{
+			
+		}
+		}
+		else
+		{
+			System.out.println("Invalid File Path!");
+		}
+
+	}
+
+}
+------------------------------------------------------------
+import java.io.*;
+public class FileProps {
+
+	public static void main(String[] args) {
+		File file=new File("D://Java//test.txt");
+		if(file.exists())
+		{
+		System.out.println(file.length()+" Bytes");
+		System.out.println("File Name:"+file.getName());
+		System.out.println("File Path:"+file.getAbsolutePath());
+		System.out.println("File Name:"+file.getParent());
+		
+		}
+		else
+		{
+			System.out.println("Incorrect FilePath!");
+		}
+    
+
+	}
+
+}
+
+-----------------------------------
+Please complete the feedback:
+
+https://tcheck.co/2nSBX5
+------------------------------
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+public class FileCopyDemo {
+
+	public static void main(String[] args) {
+		String Spath="D://Java//test.txt";
+		String Dpath="D://test.txt";
+		try {
+			File file=new File(Spath);
+			if(file.exists())
+			{
+				Files.copy(Paths.get(Spath), Paths.get(Dpath),StandardCopyOption.REPLACE_EXISTING);
+				File dfile=new File(Dpath);
+				if(dfile.exists())
+				{
+					System.out.println("File Copied Successfully!");
+				}
+				else
+				{
+					System.out.println("Something Went Wrong!");
+				}
+			}
+		}
+		catch(Exception ex)
+		{
+			
+		}
+	}
+
+}
+
+-------------------------------------------------------------------------------
+
+import java.io.*;
+public class DeleteFileDemo {
+
+	public static void main(String[] args) {
+		String fpath="D:\\Java\\test.txt";
+		File file=new File(fpath);
+		if(file.exists()) {
+		if(file.delete())
+		{
+			System.out.println("File Deleted Successfully!");
+		}
+		else
+		{
+			System.out.println("Failed to Delete");
+		}
+		}
+		else
+		{
+			System.out.println("Incorrect File Path/File Not Exists");
+		}
+		
+
+	}
+
+}
+-----------------------------------------------------------------------
+import java.io.*;
+public class DeleteFileDemo {
+
+	public static void main(String[] args) {
+		String fpath="D:\\Java\\test.txt";
+		File file=new File(fpath);
+		if(file.exists()) {
+			boolean result=file.delete();
+		if(result==true)
+		{
+			System.out.println("File Deleted Successfully!");
+		}
+		else
+		{
+			System.out.println("Failed to Delete");
+		}
+		}
+		else
+		{
+			System.out.println("Incorrect File Path/File Not Exists");
+		}
+		
+
+	}
+
+}
+----------------------------------------------------------------
+import java.io.*;
+public class RenameFileDemo {
+
+	public static void main(String[] args) {
+		File oldfile=new File("D:\\test.txt");
+		File newfile=new File("D:\\Java\\Sample.txt");
+
+		boolean result= oldfile.renameTo(newfile);
+		if(result==true)
+		{
+			System.out.println("Renamed Successfully!");
+		}
+		else
+		{
+			System.out.println("Failed to Rename");
+		}
+	}
+
+}
+--------------------------------------------------------------------
+import java.io.*;
+public class CSVDemo {
+
+	public static void main(String[] args) {
+		String fpath="D://demo.csv";
+		
+		try {
+			BufferedWriter bw=new BufferedWriter(new FileWriter(fpath));
+			bw.write("sno,course,duration");
+			bw.newLine();
+			
+			bw.write("1,Java,90 Days");
+			bw.newLine();
+			
+			bw.write("2,Angular,10 Days");
+			bw.newLine();
+			
+			bw.write("3,React,10 Days");
+			bw.newLine();
+			
+			bw.close();
+			
+			System.out.println("File Created Successfully!");
+		}
+		catch(IOException e)
+		{
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+}
+---------------------------------------------------------------------
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+public class CSVDemo {
+
+	public static void main(String[] args) {
+		String fpath="D://demo1.csv";
+		
+		try {
+			List<String> lines=new ArrayList<>();
+			lines.add("sno,course,fee");
+			lines.add("101,C++,5000");
+			lines.add("102,C#,5000");
+			lines.add("103,Python,5000");
+			lines.add("104,Java,5000");
+			lines.add("105,Angular,5000");
+			
+			Path fp=Path.of(fpath);
+			Files.write(fp, lines, StandardCharsets.UTF_8);
+			System.out.println("File Created Successfully!");
+		}
+		catch(IOException e)
+		{
+			System.out.println(e.getMessage());
+		}
+
+	}
+  -------------------------------------------------
+  import java.io.*;
+public class CreateDirDemo {
+
+	public static void main(String[] args) {
+		String path="D:\\JavaBasics\\18Aug\\TestProgram";
+		File dir=new File(path);
+		boolean result=dir.mkdirs();
+        if(result)
+        {
+        	System.out.println("Directory Created Successfully");
+        }
+        else
+        {
+        	System.out.println("Failed to create directory!");
+        }
+	}
+
+}
+--------------------------------------------------------
+import java.io.*;
+public class DirPropsDemo {
+
+	public static void main(String[] args) {
+		String path="D:\\JavaBasics\\18Aug\\TestProgrāam";
+        File dir=new File(path);
+        if(dir.isDirectory())
+        {
+        	System.out.println("It is a Directory");
+        }
+        else
+        {
+        	System.out.println("It is NOT a Directory");
+        }
+        
+        System.out.println("Absolute Path:"+dir.getAbsolutePath());
+        System.out.println("Directory:"+dir.getName());
+        System.out.println("Parent Directory:"+dir.getParent());
+	}
+
+}
+----------------------------------------------------------
+
+import java.io.*;
+public class DirFileList1 {
+
+	public static void main(String[] args) {
+		String path="D:\\JavaBasics\\18Aug\\TestProgram";
+        File dir=new File(path);
+      if(dir.isDirectory())
+      {
+        File[] filelist=dir.listFiles();
+        if(filelist!=null)
+        {
+        	for(File file:filelist)
+        	{
+        		System.out.println("Name:"+file.getName());
+        		System.out.println("File Path:"+file.getAbsolutePath());
+        		System.out.println("Size:"+file.length()+" bytes");
+        		System.out.println("Last Mofidied on:"+new java.util.Date(file.lastModified()));
+        		System.out.println("----------------------------------------------");
+        	}
+        }
+      }
+        
+
+	}
+
+}
+-----------------------------------------------------------------------------------
+
+public class StringFunctionsDemo {
+
+	public static void main(String[] args) {
+		String str="i am from Java Background";
+		System.out.println("Length:"+str.length());
+		System.out.println("Char At 5:"+str.charAt(5));
+		System.out.println("Sub String:"+str.substring(5));
+		System.out.println("Sub String:"+str.substring(5,9));
+		System.out.println("Lower Case:"+str.toLowerCase());
+		System.out.println("Upper Case:"+str.toUpperCase());
+		System.out.println("Starts With:"+str.startsWith("i am from"));
+		System.out.println("Ends With:"+str.endsWith("java"));
+		System.out.println("Index of m:"+str.indexOf('m'));
+		System.out.println("Last Index of m:"+str.lastIndexOf('m'));
+		System.out.println("Replace of m:"+str.replace('m', '$'));
+		for(String s:str.split(" "))
+		{
+			System.out.println(s);
+		}
+
+	}
+
+}
+-----------------------------------------------------------------------------
+
+public class StringFunctionsDemo {
+
+	public static void main(String[] args) {
+		String str="i am from Java Background";
+		System.out.println("Length:"+str.length());
+		System.out.println("Char At 5:"+str.charAt(5));
+		System.out.println("Sub String:"+str.substring(5));
+		System.out.println("Sub String:"+str.substring(5,9));
+		System.out.println("Lower Case:"+str.toLowerCase());
+		System.out.println("Upper Case:"+str.toUpperCase());
+		System.out.println("Starts With:"+str.startsWith("i am from"));
+		System.out.println("Ends With:"+str.endsWith("java"));
+		System.out.println("Index of m:"+str.indexOf('m'));
+		System.out.println("Last Index of m:"+str.lastIndexOf('m'));
+		System.out.println("Replace of m:"+str.replace('m', '$'));
+		System.out.println("Replace of m:"+str.replace("Java","Python"));
+		for(String s:str.split(" "))
+		{
+
+			System.out.println(s);
+		}
+		
+		String s1="i am a Java Developer";
+		String s2="i am a java developer";
+		
+		System.out.println(s1.equals(s2));
+		System.out.println(s1.equalsIgnoreCase(s2));
+		
+		System.out.println(s1.compareTo(s2));
+		System.out.println(s1.compareToIgnoreCase(s2));
+
+	}
+
+}
+-----------------------------------------------------------------
+import java.time.*;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+public class DateFunctions {
+
+	public static void main(String[] args) {
+		Date dt=new Date();
+		System.out.println(dt);
+		System.out.println(1900+dt.getYear());
+		System.out.println(dt.getMonth()+1);
+		System.out.println(dt.getDate());
+		System.out.println(dt.getHours());
+		System.out.println(dt.getMinutes());
+		System.out.println(dt.getSeconds());
+		
+		//LocalDate ld=LocalDate.now();
+		LocalDate ld=LocalDate.of(1993, 6, 28);
+		System.out.println(ld);
+		System.out.println(ld.getYear());
+		System.out.println(ld.getMonth());
+		System.out.println(ld.getMonthValue());
+		System.out.println(ld.getDayOfMonth());
+		System.out.println(ld.getDayOfYear());
+		System.out.println(ld.getDayOfWeek());
+		
+		//LocalTime lt=LocalTime.now();
+    ------------------------------------------------------------------
+    
+    
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+public class DateFunctions {
+
+	public static void main(String[] args) {
+		Date dt=new Date();
+		System.out.println(dt);
+		System.out.println(1900+dt.getYear());
+		System.out.println(dt.getMonth()+1);
+		System.out.println(dt.getDate());
+		System.out.println(dt.getHours());
+		System.out.println(dt.getMinutes());
+		System.out.println(dt.getSeconds());
+		
+		LocalDate ld=LocalDate.now();
+		//LocalDate ld=LocalDate.of(1993, 6, 28);
+		System.out.println(ld);
+		System.out.println(ld.getYear());
+		System.out.println(ld.getMonth());
+		System.out.println(ld.getMonthValue());
+		System.out.println(ld.getDayOfMonth());
+		System.out.println(ld.getDayOfYear());
+		System.out.println(ld.getDayOfWeek());
+		
+		LocalTime lt=LocalTime.now();
+		//LocalTime lt=LocalTime.of(19, 25, 30);
+		System.out.println(lt);
+		System.out.println(lt.getHour());
+		System.out.println(lt.getMinute());
+		System.out.println(lt.getSecond());
+		System.out.println(lt.getNano());
+		
+		LocalDate d1=LocalDate.of(1998, 5, 6);
+		LocalDate d2=LocalDate.of(2015, 12, 28);
+		
+		long diffDays=ChronoUnit.DAYS.between(d1, d2);
+		System.out.println("Days Between:"+diffDays);
+		
+		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		System.out.println(d1.format(formatter));
+		
+		ZoneId id=ZoneId.of("Europe/London");
+		
+		System.out.println(ld.atStartOfDay(id).toLocalDate());
+
+	}
+
+}
+------------------------------------------------------------------------------
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+public class ZoneConversionDemo {
+
+	public static void main(String[] args) {
+		LocalDateTime date=LocalDateTime.now();
+		
+		ZoneId sZone=ZoneId.of("Asia/Dubai");
+		ZoneId dZone=ZoneId.of("America/New_York");
+		
+		ZonedDateTime sdt=date.atZone(sZone);
+		ZonedDateTime ddt=sdt.withZoneSameInstant(dZone);
+		
+		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		System.out.println(sdt.format(formatter));
+		System.out.println(ddt.format(formatter));
+
+	}
+
+}
+--------------------------------------------------------------------------------
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+public class ZoneTest {
+
+	public static void main(String[] args) {
+		ZonedDateTime dt=ZonedDateTime.now();
+		System.out.println(dt);
+		
+		ZonedDateTime dt1=dt.withZoneSameInstant(ZoneId.of("Asia/Tokyo"));
+		System.out.println(dt1);
+
+	}
+
+}
+--------------------------------------------------------------------------------------
+Feedback Link:
+
+https://tcheck.co/ntHgT3
+
+=============================
+Aug 28 onwards
+`testdb`
+mySQL
+Create Database testDB ;
+
+------------------------------------------------------------------------------------
+import java.sql.*;
+
+public class DBConnectivity {
+
+	public static void main(String[] args) throws SQLException {
+		String dburl="jdbc:mysql://localhost:3306/testDB";
+		String username="root";
+		String pwd="123456"; //orcl
+		
+		
+	Connection conn=DriverManager.getConnection(dburl,username,pwd);
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+
+	}
+
+}
+
+=======================
+----------------------------------------------------------------
+import java.sql.*;
+
+public class DBConnectivity {
+
+	public static void main(String[] args) throws SQLException {
+		String dburl="jdbc:mysql://localhost:3306/testDB";
+		String username="root";
+		String pwd="123456"; //orcl
+		
+		Connection conn=DriverManager.getConnection(dburl,username,pwd);
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("insert into Users(name,age,designation)values(?,?,?)");
+			stmt.setString(1, "Steve");
+			stmt.setInt(2, 30);
+			stmt.setString(3, "IT-Dev");
+			stmt.executeUpdate();
+			System.out.println("Record Inserted Successfully!");
+			conn.close();
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+
+}
+
+
+=======================
+
+-----------------------------------------------------------------
+import java.sql.*;
+
+public class DBConnectivity {
+
+	public static void main(String[] args) throws SQLException {
+		String dburl="jdbc:mysql://localhost:3306/testDB";
+		String username="root";
+		String pwd="123456"; //orcl
+		
+		Connection conn=DriverManager.getConnection(dburl,username,pwd);
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("insert into Users(name,age,designation)values(?,?,?)");
+			stmt.setString(1, "Steve");
+			stmt.setInt(2, 30);
+			stmt.setString(3, "IT-Dev");
+			stmt.executeUpdate();
+			System.out.println("Record Inserted Successfully!");
+			conn.close();
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+
+}
+---------------------------------------------------------
+import java.sql.*;
+import java.util.*;
+
+public class DBConnectivity {
+
+	public static void Insert() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+		System.out.println("Enter Name:");
+		String _name=sc.nextLine();
+		
+		System.out.println("Enter Age:");
+		int _age=sc.nextInt();
+		
+		System.out.println("Enter Designation:");
+		String _designation=sc.next();
+		
+		
+		String dburl="jdbc:mysql://localhost:3306/testDB";
+		String username="root";
+		String pwd="123456"; //orcl
+		
+		Connection conn=DriverManager.getConnection(dburl,username,pwd);
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("insert into Users(name,age,designation)values(?,?,?)");
+			stmt.setString(1, _name);
+			stmt.setInt(2, _age);
+			stmt.setString(3, _designation);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Inserted Successfully!");
+			conn.close();
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+	
+	public static void main(String[] args) throws SQLException {
+		Insert();
+	}
+}
+
+=========================
+-------------------------------------------------------------------------------
+import java.sql.*;
+import java.util.*;
+
+public class DBConnectivity {
+
+	public static Connection getConnection() throws SQLException
+	{
+		String dburl="jdbc:mysql://localhost:3306/testDB";
+		String username="root";
+		String pwd="123456"; //orcl
+		return DriverManager.getConnection(dburl,username,pwd);
+	}
+	public static void Insert() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+		System.out.println("Enter Name:");
+		String _name=sc.nextLine();
+		
+		System.out.println("Enter Age:");
+		int _age=sc.nextInt();
+		
+		System.out.println("Enter Designation:");
+		String _designation=sc.next();
+				
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("insert into Users(name,age,designation)values(?,?,?)");
+			stmt.setString(1, _name);
+			stmt.setInt(2, _age);
+			stmt.setString(3, _designation);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Inserted Successfully!");
+			conn.close();
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+	
+	
+	public static void Update() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+       System.out.println("Enter Id:");
+		int _id=sc.nextInt();
+		
+		System.out.println("Enter Updated Name:");
+		String _name=sc.next();
+		
+		System.out.println("Enter Updated Age:");
+		int _age=sc.nextInt();
+		
+		System.out.println("Enter Updated Designation:");
+		String _designation=sc.next();
+				
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("update Users set name=?,age=?,designation=? where id=?");
+			stmt.setString(1, _name);
+			stmt.setInt(2, _age);
+			stmt.setString(3, _designation);
+			stmt.setInt(4, _id);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Updated Successfully!");
+			conn.close();
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+	
+	public static void main(String[] args) throws SQLException {
+		Update();
+	}
+}
+
+===================================== 
+
+--------------------------------------------------------------------------
+import java.sql.*;
+import java.util.*;
+
+public class DBConnectivity {
+
+	public static Connection getConnection() throws SQLException
+	{
+		String dburl="jdbc:mysql://localhost:3306/testDB";
+		String username="root";
+		String pwd="123456"; //orcl
+		return DriverManager.getConnection(dburl,username,pwd);
+	}
+	public static void Insert() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+		System.out.println("Enter Name:");
+		String _name=sc.nextLine();
+		
+		System.out.println("Enter Age:");
+		int _age=sc.nextInt();
+		
+		System.out.println("Enter Designation:");
+		String _designation=sc.next();
+				
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("insert into Users(name,age,designation)values(?,?,?)");
+			stmt.setString(1, _name);
+			stmt.setInt(2, _age);
+			stmt.setString(3, _designation);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Inserted Successfully!");
+			conn.close();
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+		
+	public static void Update() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+       System.out.println("Enter Id:");
+		int _id=sc.nextInt();
+		
+		System.out.println("Enter Updated Name:");
+		String _name=sc.next();
+		
+		System.out.println("Enter Updated Age:");
+		int _age=sc.nextInt();
+		
+		System.out.println("Enter Updated Designation:");
+		String _designation=sc.next();
+				
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("update Users set name=?,age=?,designation=? where id=?");
+			stmt.setString(1, _name);
+			stmt.setInt(2, _age);
+			stmt.setString(3, _designation);
+			stmt.setInt(4, _id);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Updated Successfully!");
+			conn.close();
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+	
+	public static void GetData() throws SQLException
+	{
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement("select * from Users");
+			ResultSet rs=stmt .executeQuery();
+			while(rs.next()) {
+				System.out.println("Name:"+rs.getString("name")+"     Age:"+rs.getInt("age")+"      Designation:"+rs.getString("designation"));
+			}
+		}
+		
+	}
+	public static void main(String[] args) throws SQLException {
+		GetData();
+	}
+}
+========================
+
+import java.sql.*;
+import java.util.*;
+
+public class DBConnectivity {
+
+	public static Connection getConnection() throws SQLException
+	{
+		String dburl="jdbc:mysql://localhost:3306/testDB";
+		String username="root";
+		String pwd="123456"; //orcl
+		return DriverManager.getConnection(dburl,username,pwd);
+	}
+	public static void Insert() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+		System.out.println("Enter Name:");
+		String _name=sc.nextLine();
+		
+		System.out.println("Enter Age:");
+		int _age=sc.nextInt();
+		
+		System.out.println("Enter Designation:");
+		String _designation=sc.next();
+				
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("insert into Users(name,age,designation)values(?,?,?)");
+			stmt.setString(1, _name);
+			stmt.setInt(2, _age);
+			stmt.setString(3, _designation);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Inserted Successfully!");
+			conn.close();
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+		
+	public static void Update() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+       System.out.println("Enter Id:");
+		int _id=sc.nextInt();
+		
+		System.out.println("Enter Updated Name:");
+		String _name=sc.next();
+		
+		System.out.println("Enter Updated Age:");
+		int _age=sc.nextInt();
+		
+		System.out.println("Enter Updated Designation:");
+		String _designation=sc.next();
+				
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("update Users set name=?,age=?,designation=? where id=?");
+			stmt.setString(1, _name);
+			stmt.setInt(2, _age);
+			stmt.setString(3, _designation);
+			stmt.setInt(4, _id);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Updated Successfully!");
+			conn.close();
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+	
+	public static void GetData() throws SQLException
+	{
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement("select * from Users");
+			ResultSet rs=stmt .executeQuery();
+			while(rs.next()) {
+				System.out.println("Name:"+rs.getString("name")+"     Age:"+rs.getInt("age")+"      Designation:"+rs.getString("designation"));
+			}
+			conn.close();
+		}
+		
+	}
+	
+	public static void GetTotalRows() throws SQLException
+	{
+	Connection conn=getConnection();
+			
+			if(conn!=null && !conn.isClosed())
+			{
+				Statement stmt=conn.createStatement();
+				ResultSet rs=stmt.executeQuery("select count(*) from Users");
+				rs.next();
+				int RowCount=rs.getInt(1);
+				System.out.println("Total Rows : "+RowCount);
+				conn.close();
+			}
+			
+	}
+	
+	
+	
+	public static void main(String[] args) throws SQLException {
+		GetTotalRows();
+	}
+}
+
+
+==============
+import java.sql.*;
+import java.util.*;
+
+public class DBConnectivity {
+
+	public static Connection getConnection() throws SQLException
+	{
+		String dburl="jdbc:mysql://localhost:3306/testDB";
+		String username="root";
+		String pwd="123456"; //orcl
+		return DriverManager.getConnection(dburl,username,pwd);
+	}
+	public static void Insert() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+		System.out.println("Enter Name:");
+		String _name=sc.nextLine();
+		
+		System.out.println("Enter Age:");
+		int _age=sc.nextInt();
+		
+		System.out.println("Enter Designation:");
+		String _designation=sc.next();
+				
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("insert into Users(name,age,designation)values(?,?,?)");
+			stmt.setString(1, _name);
+			stmt.setInt(2, _age);
+			stmt.setString(3, _designation);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Inserted Successfully!");
+			conn.close();
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+		
+	public static void Update() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+       System.out.println("Enter Id:");
+		int _id=sc.nextInt();
+		
+		System.out.println("Enter Updated Name:");
+		String _name=sc.next();
+		
+		System.out.println("Enter Updated Age:");
+		int _age=sc.nextInt();
+		
+		System.out.println("Enter Updated Designation:");
+		String _designation=sc.next();
+				
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("update Users set name=?,age=?,designation=? where id=?");
+			stmt.setString(1, _name);
+			stmt.setInt(2, _age);
+			stmt.setString(3, _designation);
+			stmt.setInt(4, _id);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Updated Successfully!");
+			conn.close();
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+	
+	public static void GetData() throws SQLException
+	{
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement("select * from Users");
+			ResultSet rs=stmt .executeQuery();
+			while(rs.next()) {
+				System.out.println("Name:"+rs.getString("name")+"     Age:"+rs.getInt("age")+"      Designation:"+rs.getString("designation"));
+			}
+			conn.close();
+		}
+		
+	}
+	
+	public static void GetTotalRows() throws SQLException
+	{
+	Connection conn=getConnection();
+			
+			if(conn!=null && !conn.isClosed())
+			{
+				Statement stmt=conn.createStatement();
+				ResultSet rs=stmt.executeQuery("select count(*) from Users");
+				rs.next();
+				int RowCount=rs.getInt(1);
+				System.out.println("Total Rows : "+RowCount);
+				conn.close();
+			}
+			
+	}
+	
+	public static void Delete() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+       System.out.println("Enter Id:");
+		int _id=sc.nextInt();
+					
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("delete from Users where id=?");
+			stmt.setInt(1, _id);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Deleted Successfully!");
+			conn.close();
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+	
+	
+	public static void main(String[] args) throws SQLException {
+		Delete();
+	}
+}
+
+
+==================>>>>>>>>>>>>>>>>>>>>
+
+import java.sql.*;
+import java.util.*;
+
+public class DBConnectivity {
+
+	public static Connection getConnection() throws SQLException
+	{
+		String dburl="jdbc:mysql://localhost:3306/testDB";
+		String username="root";
+		String pwd="123456"; //orcl
+		return DriverManager.getConnection(dburl,username,pwd);
+	}
+	public static void Insert() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+		System.out.println("Enter Name:");
+		String _name=sc.nextLine();
+		
+		System.out.println("Enter Age:");
+		int _age=sc.nextInt();
+		
+		System.out.println("Enter Designation:");
+		String _designation=sc.next();
+				
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("insert into Users(name,age,designation)values(?,?,?)");
+			stmt.setString(1, _name);
+			stmt.setInt(2, _age);
+			stmt.setString(3, _designation);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Inserted Successfully!");
+			conn.close();
+			
+			System.out.println("----------------------------------------------------");
+			GetTotalRows();			
+			System.out.println("----------------------------------------------------");
+			GetData();
+			System.out.println("----------------------------------------------------");
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+		
+	public static void Update() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+       System.out.println("Enter Id:");
+		int _id=sc.nextInt();
+		
+		System.out.println("Enter Updated Name:");
+		String _name=sc.next();
+		
+		System.out.println("Enter Updated Age:");
+		int _age=sc.nextInt();
+		
+		System.out.println("Enter Updated Designation:");
+		String _designation=sc.next();
+				
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("update Users set name=?,age=?,designation=? where id=?");
+			stmt.setString(1, _name);
+			stmt.setInt(2, _age);
+			stmt.setString(3, _designation);
+			stmt.setInt(4, _id);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Updated Successfully!");
+			conn.close();
+			
+			System.out.println("----------------------------------------------------");
+			GetTotalRows();			
+			System.out.println("----------------------------------------------------");
+			GetData();
+			System.out.println("----------------------------------------------------");
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+	
+	public static void GetData() throws SQLException
+	{
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement("select * from Users");
+			ResultSet rs=stmt .executeQuery();
+			while(rs.next()) {
+				System.out.println("Id:"+rs.getInt("Id")+"      Name:"+rs.getString("name")+"     Age:"+rs.getInt("age")+"      Designation:"+rs.getString("designation"));
+			}
+			conn.close();
+		}
+		
+	}
+	
+	public static void GetTotalRows() throws SQLException
+	{
+	Connection conn=getConnection();
+			
+			if(conn!=null && !conn.isClosed())
+			{
+				Statement stmt=conn.createStatement();
+				ResultSet rs=stmt.executeQuery("select count(*) from Users");
+				rs.next();
+				int RowCount=rs.getInt(1);
+				System.out.println("Total Rows : "+RowCount);
+				conn.close();
+			}
+			
+	}
+	
+	public static void Delete() throws SQLException
+	{
+       Scanner sc=new Scanner(System.in);
+		
+       System.out.println("Enter Id:");
+		int _id=sc.nextInt();
+					
+		Connection conn=getConnection();
+		
+		if(conn!=null && !conn.isClosed())
+		{
+			System.out.println("Connected!");
+			PreparedStatement stmt=conn.prepareStatement
+					("delete from Users where id=?");
+			stmt.setInt(1, _id);
+			int Rows=stmt.executeUpdate();
+			System.out.println(Rows+" Record(s) Deleted Successfully!");
+			conn.close();
+			
+			System.out.println("----------------------------------------------------");
+			GetTotalRows();			
+			System.out.println("----------------------------------------------------");
+			GetData();
+			System.out.println("----------------------------------------------------");
+		}
+		else
+		{
+			System.out.println("Not Connected!");
+		}
+	
+
+	}
+	
+	
+	public static void main(String[] args) throws SQLException {
+		Scanner sc=new Scanner(System.in);
+		boolean x=true;
+		while(x)
+		{
+			System.out.println(" Enter \n 1.Add\n 2.Update\n 3.Delete\n 4.Get User Data\n 0.Exit");
+			int n=sc.nextInt();
+			switch(n)
+			{
+			case 1: Insert();break;
+			case 2: Update();break;
+			case 3: Delete();break;
+			case 4: GetData();break;
+			case 0: x=false;break;
+			default: System.out.println("Wrong Input!");break;
+			}
+		}
+	}
+}
+
